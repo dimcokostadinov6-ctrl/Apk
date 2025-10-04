@@ -1,0 +1,17 @@
+name: Build Android APK (Lite)
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: kivy/buildozer:latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build APK (debug)
+        run: buildozer android debug
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: veresia-apk-lite
+          path: bin/*.apk
